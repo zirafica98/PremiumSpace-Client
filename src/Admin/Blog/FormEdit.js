@@ -12,36 +12,33 @@ export default function MyFormEdit(data) {
 
 
 
-  const addBlog = () =>{
+  const editBlog = () =>{
+    var formData = new FormData();
+    var myarray = new Array();
     var data = {
-        id:id,
-        title:naslov,
-        text:text,
-        allow:allow
+      id:id,
+      title:naslov,
+      text:text,
+      allow:allow
     }
-    axios.post(SERVER_NODE+"blog/edit", data).then((response) => {
-        if(response.status == 200){
+    myarray.push(data);
+    var paramsData = { myarray: myarray };
+    formData.append('data',JSON.stringify(paramsData));
+    formData.append('function', 'editBlog');
+    var params = {
+      method:'POST',
+      body:formData
+    }
+    fetch("https://server.premiumspace.rs/Blog.php",params)
+      .then(response => response.json())
+      .then((response) => {
+        if(response){
           setSuccess(true)
         }else{
-          alert("Greska")
+          alert("Error");
         }
-    })
+      })
 }
-
-
-
-
-  useEffect(() => {
-    var nextId;
-    if(nextId == undefined){
-        axios.get("http://localhost:3001/realEstate/nextId").then((response) => {
-            if(response.status == 200){
-              nextId=response.data['AUTO_INCREMENT'];
-            }
-        });
-    }
-    
-  });
 
   return (
     <div>
@@ -65,7 +62,7 @@ export default function MyFormEdit(data) {
                   </div>
                 </div>
                 <div className="button-section">
-                    <button onClick={addBlog}>Azuriraj blog</button>
+                    <button onClick={editBlog}>Azuriraj blog</button>
                 </div>
         </div>
     </div>

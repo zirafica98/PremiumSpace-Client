@@ -1,7 +1,5 @@
-import React, {useEffect, useState} from 'react'
-import axios from 'axios';
+import React, {useState} from 'react'
 import MessageBox from '../../MessageBox';
-import { SERVER_NODE } from '../../Config/variable';
 
 export default function MyForm() {
 
@@ -13,16 +11,30 @@ export default function MyForm() {
 
 
   const addBlog = () =>{
+    var formData = new FormData();
+    var myarray = new Array();
     var data = {
         title:naslov,
         text:text,
         allow:allow,
     }
-    axios.post(SERVER_NODE+"blog/add", data).then((response) => {
-        if(response.status == 200){
-          setSuccess(true);
+    myarray.push(data);
+    var paramsData = { myarray: myarray };
+    formData.append('data',JSON.stringify(paramsData));
+    formData.append('function', 'putBlogs');
+    var params = {
+      method:'POST',
+      body:formData
+    }
+    fetch("https://server.premiumspace.rs/Blog.php",params)
+      .then(response => response.json())
+      .then((response) => {
+        if(response){
+          setSuccess(true)
+        }else{
+          alert("Error");
         }
-    })
+      })
 }
 
 

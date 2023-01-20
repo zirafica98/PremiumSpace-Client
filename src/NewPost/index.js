@@ -6,48 +6,101 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useTranslation } from "react-i18next";
 import { SERVER_NODE } from '../Config/variable';
+import $ from 'jquery';
 
 export default function NewPost() {
  const [data, setData] = useState([])
  const [isLoading, setIsLoading] = useState(false);
+ const [numberSlide,setNumberSlide] = useState();
  let history = useNavigate();
  const { t } = useTranslation();
 
-  useEffect(()=>{
-    Axios.get(SERVER_NODE+'realEstate/last6').then((data)=>{
-        if((data.data).length>0){
-            setData(data.data);
-            setIsLoading(true);
+   useEffect ( ()=>{
+    async function fetchData() {
+        var formData = new FormData();
+        formData.append('function', 'getLastRealEstate');  
+        var params = {
+            method:'POST',
+            body:formData
         }
-        
-    })
+        // fetch("https://server.premiumspace.rs/RealEstate.php",params)
+        //     .then(response => response.json())
+        //     .then((response) => {
+        //         setData(response);
+        //         setIsLoading(true);
+        //     }
+        // )
+
+            $.post('https://server.premiumspace.rs/RealEstate.php',
+                { function: "getLastRealEstate"
+                },
+                function(data) {
+                    var result = JSON.parse(data);
+                     setData(result);
+                      setIsLoading(true);
+                      if(result.length<3){
+                        setNumberSlide(2);
+                      }else{
+                        setNumberSlide(3);
+                      }
+                }
+            )
+
+    }
+      fetchData();
   },[])
 
   const settings = {
       dots: false,
       autoplay: true,
       infinite: true,
-      slidesToShow: 3,
-      slidesToScroll: 1
+      slidesToShow:numberSlide,
+      slidesToScroll: 2,
+      responsive: [
+        {
+          breakpoint: 2658,
+          settings: {
+            slidesToShow: numberSlide,
+            slidesToScroll: 3,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 1023,
+          settings: {
+            slidesToShow: numberSlide,
+            slidesToScroll: 2,
+            initialSlide: 2,
+            dots: false
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            dots:false
+          }
+        }
+      ]
   };
 
   return (
     <div className="container result newPost">
         <div className="result-search">
-            <div className="search-container row">
+            <div className="search-container">
                 <div className='title'><h2>{t("latest-real-estate")}</h2></div>
                     <Slider {...settings}>
                     {isLoading && (data).map(val => (
-                        <div className="realEstate col-lg-4 col-md-4 col-sm-6" key={val.id} onClick = {() => {history('/products/'+val.id)}}>
+                        <div className="realEstate" key={val.id} onClick = {() => {history('/products/'+val.id)}}>
                             <a href='#' ket={val.id}>
                                 <div className="up-section">
                                     <div className="img">
                                         {val.base64 == null ? (
                                             <img src='no-image.png' alt='No image'></img>
                                         ):(
-                                            // <img src={"https://firebasestorage.googleapis.com/v0/b/premiumspace-dfd7a.appspot.com/o/images%2F"+(val.id)+"%2F"+((val.slika).toString().split(';'))[0]+"?alt=media"} alt="image" />
                                             <img src={(val.base64).toString().split('|||')[0]} alt="image" />
-                                            // <img src='no-image.png' alt='No image'></img>
                                         )}
                                     </div>
                                     <div className="price">

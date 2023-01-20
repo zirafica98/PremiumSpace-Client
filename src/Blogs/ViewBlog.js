@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react"
 import {useParams} from 'react-router-dom';
-import Axios from 'axios'
-import { SERVER_NODE } from "../Config/variable";
-
 function ViewBlog() {
     const params = useParams();
     const [loading, setLoading] = useState(true);
@@ -14,20 +11,31 @@ function ViewBlog() {
         const fetchData = async () =>{
           setLoading(true);
           try {
-            await Axios.get(SERVER_NODE+'Blog/byData/' + params.id).then((response) =>{
-              response = response.data;
-
-                var arrayDate=[];
-                    var newDate=new Date(response.updatedAt)
-                    var day= newDate.getDate();
-                    var month = newDate.getMonth();
-                    var year = newDate.getFullYear();
-    
-                    var dataString= day + "." + month + "." + year 
-                    arrayDate.push(dataString);
-                
-              setDate(arrayDate)
-              setData(response);
+            var formData = new FormData();
+            var myarray = new Array();
+            var data = {
+              id:params.id
+            };
+            myarray.push(data);
+            formData.append('function', 'getBlogById');
+            var paramsData = { myarray: myarray };
+            formData.append('data',JSON.stringify(paramsData));
+            var paramsData = {
+                method:'POST',
+                body:formData
+            }
+            fetch("https://server.premiumspace.rs/Blog.php",paramsData)
+            .then(response => response.json())
+            .then((response) => {
+              var arrayDate=[];
+              var newDate=new Date(response.updatedAt);
+              var day= newDate.getDate();
+              var month = newDate.getMonth();
+              var year = newDate.getFullYear();
+              var dataString= day + "." + month + "." + year;
+              arrayDate.push(dataString);
+              setDate(arrayDate);
+              setData(response);      
             })
             
           } catch (error) {

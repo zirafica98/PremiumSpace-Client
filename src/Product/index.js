@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react"
-import {Route, Link, Routes, useParams} from 'react-router-dom';
-import Axios from 'axios'
+import {useParams} from 'react-router-dom';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import { useTranslation } from "react-i18next";
-import { SERVER_NODE } from "../Config/variable";
+import ReactGA from "react-ga"
 
 
 export default function Product() {
@@ -17,7 +16,7 @@ export default function Product() {
     const { t } = useTranslation();
 
     const settings = {
-        dots: true,
+        dots: false,
         infinite: true,
         speed: 300,
         slidesToShow: 1,
@@ -25,18 +24,42 @@ export default function Product() {
       };
 
     useEffect(() => {
+      ReactGA.event({"category":"Product","action":"load","label":"label"})
         const fetchData = async () =>{
           setLoading(true);
           try {
-            await Axios.get(SERVER_NODE+'realEstate/byData/' + params.id).then((response) =>{
-              response = response.data;
+
+            var formData = new FormData();
+            var myarray = new Array();
+            formData.append('function', 'getByIdRealEstate');
+            var data = {
+              id:params.id
+            }
+            myarray.push(data);
+            var paramsData = { myarray: myarray };
+            formData.append('data',JSON.stringify(paramsData));
+            var paramsData = {
+                method:'POST',
+                body:formData
+            }
+            fetch("https://server.premiumspace.rs/RealEstate.php",paramsData)
+            .then(response => response.json())
+            .then((response)=>{
               var imageArray=[];
               var image=response.base64;
               imageArray=image.split("|||");
-              setImage(imageArray);
+              var imageArrayCheck=[];
+              imageArray.forEach(element => {
+                if(element != ""){
+                  imageArrayCheck.push(element)
+                }
+              });
+              setImage(imageArrayCheck);
               setData(response);
-              setLinkAddress("https://www.google.com/maps/embed/v1/place?key=AIzaSyBDsxzY2Lp_gp_9NwEWRa79mAgLxfSa5gQ&region=SR&language=sr&q="+ response.drzava +","+response.grad + "," +response.opstina +',' + response.ulica + " " + response.broj);
+
+              setLinkAddress("https://www.google.com/maps/embed/v1/place?key=AIzaSyBDsxzY2Lp_gp_9NwEWRa79mAgLxfSa5gQ&region=SR&language=sr&q="+ response.drzava +","+response.grad + "," +response.opstina +" "+ response.ulica + " " + response.broj);
             })
+            
             
           } catch (error) {
             console.error(error.message);
@@ -52,19 +75,18 @@ export default function Product() {
     <div>
     {loading && <div>Loading</div>}
     {!loading && (
-      <div className="product-detail container">
-            <div key={data.id}>
+      <div className="product-detail container-fluid">
+            <div className="container" key={data.id}>
                 <div className="row">
                     <div className="col-md-12 title">
                         <h2>{data.naslov}</h2>
                     </div>
                 </div>
                 <div className="image-carousel row">
-                    <div className="col-md-7">
+                    <div className="col-md-7 col-sm-12">
                         <Slider {...settings}>
                             {image.map(val =>(
                                 <div key={0}>
-                                    {/* <img src={"https://firebasestorage.googleapis.com/v0/b/premiumspace-dfd7a.appspot.com/o/images%2F"+(params.id)+"%2F"+(val)+"?alt=media"} alt="image" /> */}
                                     <img src={val} alt="image" />
                                 </div>
                             ))}
@@ -78,7 +100,7 @@ export default function Product() {
                     </div>
                 </div>
                 <div className="row priceAndSize">
-                  <div className="col-md-3 col-sm-12">
+                  <div className="col-md-5  col-lg-3 col-sm-12">
                   <span className="price">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(data.cena)}</span>
                   <span className="priceWithSize">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(parseInt(data.cena)/parseInt(data.povrsina))}/m²</span>
                   </div>

@@ -1,19 +1,9 @@
-import React, {useEffect, useState} from 'react'
-import { storage } from '../../helpers/firebase';
-import {ref, uploadBytes,uploadBytesResumable, deleteObject,getStorage,listAll  } from 'firebase/storage'
-import axios from 'axios';
-import {v4} from "uuid"
-import { data } from 'jquery';
+import React,{useState} from 'react'
 import MessageBox from '../../MessageBox';
-import { SERVER_NODE } from '../../Config/variable';
 import FileBase64 from 'react-file-base64';
 
 export default function MyFormEdit(data) {
   const [id,setId] = useState(data.data.id)
-  const [nextId, setNextId] = useState("");
-  const [progress, setProgress] = useState(0);
-  const [images, setImages] = useState([]);
-  const [imagesValue, setImagesValue] = useState(data.data.slika);
   const [success, setSuccess] = useState(false);
 
 
@@ -36,7 +26,7 @@ export default function MyFormEdit(data) {
   const [brojUkupnoSpratova, setBrojUkupnoSpratova] = useState(data.data.brojUkupnoSpratova);
   const [opremljenost, setOpremljenost] = useState(data.data.opremljenost);
   const [cena, setCena] = useState(data.data.cena);
-  const [listingData,setListingData] = useState();
+  const [listingData,setListingData] = useState(data.data.base64);
 
 
 
@@ -61,32 +51,29 @@ export default function MyFormEdit(data) {
         brojSpratova:brojUkupnoSpratova,
         opremljenost:opremljenost,
         cena:cena,
-        slika:"",
         base64:listingData
     }
-    axios.post(SERVER_NODE+"realEstate/edit", data).then((response) => {
-        if(response.status == 200){
-          setSuccess(true)
-        }
-    })
-}
 
-
-
-
-
-  useEffect(() => {
-    var nextId;
-    if(nextId == undefined){
-        axios.get(SERVER_NODE+"realEstate/nextId").then((response) => {
-            if(response.status == 200){
-              nextId=response.data[response.data.length-1].id;
-            }
-            setNextId(nextId);
-        });
+    var formData = new FormData();
+    var myarray = new Array();
+    myarray.push(data);
+    var paramsData = { myarray: myarray };
+    formData.append('data',JSON.stringify(paramsData));
+    formData.append('function', 'editRealEstate');
+    var params = {
+      method:'POST',
+      body:formData
     }
-    
-  });
+    fetch("https://server.premiumspace.rs/RealEstate.php",params)
+      .then(response => response.json())
+      .then((response) => {
+        if(response){
+          setSuccess(true)
+        }else{
+          alert("Error");
+        }
+      })
+}
 
   const getFiles = (files) =>{
     var string="";

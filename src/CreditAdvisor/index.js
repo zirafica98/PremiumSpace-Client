@@ -22,13 +22,30 @@ function CreditAdvisor() {
                 lastName:lastName,
                 phone:phoneNumber
             }
-            axios.post(SERVER_NODE+"mail/sendMailCreditor", data).then((response) => {
-                if(response.status == 200){
-                  setSuccess(true);
+            var formData = new FormData();
+            var myarray = new Array();
+            formData.append('function', 'sendMailCreditor');
+            myarray.push(data);
+            var paramsData = { myarray: myarray };
+            formData.append('data',JSON.stringify(paramsData));
+            var params = {
+                method:'POST',
+                body:formData
+            }
+        
+            fetch("https://server.premiumspace.rs/Mail.php",params)
+              .then(response => response.text())
+              .then((response)=>{
+                if(response){
+                    setSuccess(true);
+
+                }else{
+                    alert("Error");
                 }
-            })
+              })
+
         }else{
-            alert(t("alert-mess-1"));
+            alert("Morate popuniti sva obavezna polja");
         }
         
     }

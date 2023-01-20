@@ -7,11 +7,6 @@ class FieldGroup extends React.Component {
     super(props)
     this.form = props.form
     this.state = {
-      /*
-        * Create a watched fields object for this group based on
-        * initial static related fields and other dynamically related fields
-        * in order to reduce re-renders and speed up large forms.
-      */
       watched: props.fields.map(field => {
         let f = {
           ...field,
@@ -60,13 +55,13 @@ class FieldGroup extends React.Component {
       }
       return f
     })
-    if (isEqual(this.state.watched, newwatched)) { return false } // Only re-render group if our watch has changed
+    if (isEqual(this.state.watched, newwatched)) { return false }
     return true
   }
 
   isVisible = field => {
     let show = false
-    if (field.show) { // Dependency exists
+    if (field.show) { 
       Object.keys(field.show).forEach( requiredfield => {
         if (Array.isArray(field.show[requiredfield])) {
           field.show[requiredfield].forEach( fieldvalue => {

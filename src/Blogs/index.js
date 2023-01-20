@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios';
 import {useNavigate,useParams} from "react-router-dom"
-import { SERVER_NODE } from '../Config/variable';
 import { t } from 'i18next';
 
 
@@ -12,22 +10,22 @@ function Blogs() {
     const params = useParams();
     let history = useNavigate();
 
-    useEffect(() => {
-        const fetchData = async () =>{
-          setLoading(true);
-            axios.get(SERVER_NODE+`blog/`).then((response) => {
-                var arrayBlogs=[];
-                arrayBlogs.push(response.data);
-                // arrayApprow.push(response.data);
-                // (arrayBlogs[0]).forEach((element,index)=>{
-                //     if(element.allow == 0){
-                //         arrayApprow[0].splice(index,1)
-                //     }
-                // })
-                setBlogs(arrayBlogs[0]);
-                var dateformat= response.data
+    const getBlogs = function(){
+        var formData = new FormData();
+        var myarray = new Array();
+        formData.append('function', 'getBlogs');
+        var params = {
+            method:'POST',
+            body:formData
+        }
+
+        fetch("https://server.premiumspace.rs/Blog.php",params)
+            .then(response => response.json())
+            .then((response) => {
+                setLoading(true);
+                setBlogs(response);
                 var arrayDate=[];
-                dateformat.forEach((element,index)=>{
+                response.forEach((element,index)=>{
                     var newDate=new Date(element.updatedAt)
                     var day= newDate.getDate();
                     var month = newDate.getMonth();
@@ -36,20 +34,25 @@ function Blogs() {
                     var dataString= day + "." + month + "." + year 
                     arrayDate.push(dataString);
                 })
-                
                 setDate(arrayDate)
                 setLoading(false);
-            });
-        }
-        
-    
-        fetchData();
+            })
+    }
+
+    useEffect(() => {
+        getBlogs();
       }, []);
 
       if(blogs.length == 0){
         return(
             <>
-                <h3>{t("no-text")}</h3>
+                <div className='container no-text'>
+                    <div className='row'>
+                        <div className='col-md-12'>
+                            <h3>{t("no-text")}</h3>
+                        </div>
+                    </div>
+                </div>
             </>
         )
       }else{

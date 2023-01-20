@@ -1,51 +1,47 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { AuthContext } from '../helpers/AuthContext';
 import {useState} from "react"
-import axios from 'axios';
 import Login from '../Login';
 import Products from "./Product/Products"
-import { SERVER_NODE } from '../Config/variable';
 
 export default function Admin() {
-    const [authState, setAuthState] = useState({
-      email:"",
-      id:0,
-      status: false
-    });
+    const [isLogedIn, setIsLogedIn] = useState(false);
     useEffect(() => {
-        axios
-          .get(SERVER_NODE+"auth/auth", {
-            headers: {
-              accessToken: localStorage.getItem("accessToken"),
-            },
-          })
-          .then((response) => {
-            if (response.data.error) {
-              setAuthState({...authState,status:false});
-            } else {
-              setAuthState({
-                email:response.data.email,
-                id:response.data.id,
-                status:true
-              });
-            }
-          });
-      }, []);
+      var formData = new FormData();
+      var myarray = new Array();
+      const data = { accessToken: localStorage.getItem("accessToken") };
+      myarray.push(data);
+      formData.append('function', 'checkTokenAccess');
+      var paramsData = { myarray: myarray };
+      formData.append('data',JSON.stringify(paramsData));
+      var params = {
+          method:'POST',
+          body:formData
+      }
+
+      fetch("https://server.premiumspace.rs/User.php",params)
+      .then(response => response.json())
+      .then((response) => {
+        if(response != false){
+          setIsLogedIn(true);
+        }else{
+          setIsLogedIn(false);
+        }
+      })
+    }, []);
+
 
     return(
        <div>
-            <AuthContext.Provider value={{ authState, setAuthState }}>
-                <>
-                {authState.status ? (
-                   <Products></Products>
-                ):(
-                    <>
-                        <Login></Login>
-                    </>
-                )}
-                </>
-                
-            </AuthContext.Provider>
+          {isLogedIn ? (
+            <>
+              <Products></Products>
+            </>
+          ):(
+            <>
+            <Login></Login>
+            </>
+          )}
        </div>
     )
 }

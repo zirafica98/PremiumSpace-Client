@@ -7,6 +7,11 @@ import i18next from 'i18next'
 import cookies from 'js-cookie'
 import classNames from 'classnames'
 
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+
 export default function Header(props) {
 
   const languages=[
@@ -51,73 +56,43 @@ export default function Header(props) {
   )
 
     return (
-      <header className={"header "+ props.class}>
-        <div className="container head">
-            <div className="row">
-                <div className="col-md-3 logo">
-                    <a href="/"><img src="/logo-v7.png" alt="image" /></a>
-                </div>
-                <nav className="col-md-9 links ">
-                    <ul className="menu-primary-navigation">
-                        <li className="menu-item">
-                          <a href="/nekretnine"><span>{t('real_estate')}</span></a>
-                        </li>
-                        <li className="menu-item"><a href="/kreditni-savetnik"><span>{t('credit_counselor')}</span></a></li>
-                        <li className="menu-item">
-                          <DropdownButton id="dropdown-basic-button" title={t('about_us')}>
-                            <Dropdown.Item href="/o-nama">{t('about_us')}</Dropdown.Item>
-                            <Dropdown.Item href="/cenovnik">{t('pricelist')}</Dropdown.Item>
-                            <Dropdown.Item href="/opsti-uslovi">{t('general-business-conditions')}</Dropdown.Item>
-                          </DropdownButton>
-                          </li>
-                        <li className="menu-item"><a href="/strucni-tekstovi"><span>{t("professiona-texts")}</span></a></li>
-                        <li className="menu-item"><a href="/kontakt"><span>{t("contact")}</span></a></li>
-                        <li className="menu-item">
-                              <div className="dropdown">
-                                <button
-                                  className="btn btn-link dropdown-toggle"
-                                  type="button"
-                                  id="dropdownMenuButton1"
-                                  data-bs-toggle="dropdown"
-                                  aria-expanded="false"
-                                >
-                                  <GlobeIcon />
-                                </button>
-                                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                  <li>
-                                    <span className="dropdown-item-text">{t('language')}</span>
-                                  </li>
-                                  {languages.map(({ code, name, country_code }) => (
-                                    <li key={country_code}>
-                                      <a
-                                        href="#"
-                                        className={classNames('dropdown-item', {
-                                          disabled: currentLanguageCode === code,
-                                        })}
-                                        onClick={() => {
-                                          i18next.changeLanguage(code)
-                                        }}
-                                      >
-                                        <span
-                                          className={`flag-icon flag-icon-${country_code} mx-2`}
-                                          style={{
-                                            opacity: currentLanguageCode === code ? 0.5 : 1,
-                                          }}
-                                        ></span>
-                                        {name}
-                                      </a>
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+      <div className={"header "+ props.class}>
+      <Navbar expand="lg">
+      <Container>
+        <Navbar.Brand href="/"><img src="/logo-v7.png" alt="image" /></Navbar.Brand>
+        <Navbar.Toggle className="navbar-right pushy pushy-right" aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link href="/nekretnine"><span>{t('real_estate')}</span></Nav.Link>
+            <Nav.Link href="/kreditni-savetnik"><span>{t('credit_counselor')}</span></Nav.Link>
+            <NavDropdown title={t('about_us')} id="basic-nav-dropdown">
+              <NavDropdown.Item href="/o-nama">{t('about_us')}</NavDropdown.Item>
+              <NavDropdown.Item href="/cenovnik">{t('pricelist')}</NavDropdown.Item>
+              <NavDropdown.Item href="/opsti-uslovi">{t('general-business-conditions')}</NavDropdown.Item>
+              <NavDropdown.Item href="https://www.rgz.gov.rs/usluge/ekatastar/ekatastar-javni-pristup" target="_blank">{t('real-estate-registre')}</NavDropdown.Item>
+            </NavDropdown>
+            <Nav.Link href="/strucni-tekstovi"><span>{t("professiona-texts")}</span></Nav.Link>
+            <Nav.Link href="/kontakt"><span> {t("con")}</span></Nav.Link>
+            <NavDropdown title={<GlobeIcon></GlobeIcon>} id="basic-nav-dropdown">
+                {languages.map(({ code, name, country_code }) => (
+                  <li key={country_code}>
+                    <a href="#" className={classNames('dropdown-item', {disabled: currentLanguageCode === code,})} onClick={() => {i18next.changeLanguage(code)}}>
+                      <span className={`flag-icon flag-icon-${country_code} mx-2`} style={{ opacity: currentLanguageCode === code ? 0.5 : 1, }} ></span>
+                      {name}
+                    </a>
+                  </li>
+              ))}
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+      <div className="text-banner container-fluid">
+        <div className="container">
+        <h1>{t("banner-text")}</h1>
+
         </div>
-        <div className="container text-banner">
-          <h1>{t("banner-text")}</h1>
         </div>
-      </header>
+    </div>
     );
 }

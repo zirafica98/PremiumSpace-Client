@@ -1,19 +1,9 @@
 import React, { useState} from 'react'
-import {storage} from '../../helpers/firebase';
-import {ref,uploadBytesResumable, deleteObject,getStorage,listAll  } from 'firebase/storage'
-import axios from 'axios';
-import $ from "jquery"
 import MessageBox from '../../MessageBox';
-import { SERVER_NODE } from '../../Config/variable';
 import FileBase64 from 'react-file-base64';
-import { element } from 'prop-types';
 
 
 export default function MyForm() {
-  const [nextId, setNextId] = useState();
-  const [progress, setProgress] = useState(0);
-  const [images, setImages] = useState([]);
-  const [imagesValue, setImagesValue] = useState();
   const [success, setSuccess] = useState(false);
 
 
@@ -64,16 +54,27 @@ export default function MyForm() {
       slika:"",
       base64:listingData
   }
-  axios.post(SERVER_NODE+"realEstate/add", data,{
-    maxBodyLength: Infinity,
-    maxContentLength: Infinity,
-  }).then((response) => {
-      if(response.status == 200){
-        setSuccess(true);
-      }else{
-      alert("Greska")
-      }
-  })};
+
+  var formData = new FormData();
+    var myarray = new Array();
+    myarray.push(data);
+    var paramsData = { myarray: myarray };
+    formData.append('data',JSON.stringify(paramsData));
+    formData.append('function', 'putRealEstate');
+    var params = {
+      method:'POST',
+      body:formData
+    }
+    fetch("https://server.premiumspace.rs/RealEstate.php",params)
+      .then(response => response.text())
+      .then((response) => {
+        if(response){
+          setSuccess(true)
+        }else{
+          alert("Error");
+        }
+      })}
+
   const getFiles = (files) =>{
     var string="";
     files.forEach((element,index)=>{

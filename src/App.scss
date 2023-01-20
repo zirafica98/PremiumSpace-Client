@@ -1,6 +1,6 @@
 $primeColor:#ceab74;
 $primeColorHover:#D6BA8D;
-$grayBackground: #807c7c;
+$grayBackground: rgba(61,60,62,255);
 
 .button-prime{
   color: white;
@@ -25,90 +25,124 @@ body{
     .slick-slide img{
       height: 95vh;
       width: 100%;
+      @media only  screen and (max-width:768px){
+        height: 49vh;
+      }
     }
+    .slick-arrow{
+      @media only  screen and (max-width:768px){
+        display: none !important;
+      }
+    }
+
   }
 
   
   .header{
-    position: absolute;
-    z-index: 100;
-    top: 2%;
-    margin: 0 auto;
-    width: 100%;
-    .head{
-      background-color: rgba(0, 0, 0, 0.5);
-      .logo{
-        >a{
-          >img{
-            width: 50%;
+    .navbar{
+      position: absolute;
+      z-index: 10000;
+      top: 2%;
+      margin: 0 auto;
+      width: 100%;
+      @media only  screen and (max-width:768px){
+        top: 0;
+        padding: 0;
+      }
+      .container{
+        background-color: rgba(0, 0, 0, 0.5);
+        @media only  screen and (max-width:768px){
+          flex-wrap: nowrap;
+        }
+        .navbar-brand{
+            >img{
+              width: 35%;
+              @media only  screen and (max-width:768px){
+                width: 60% !important;
+              }
+              @media only  screen and (max-width:1024px){
+                width: 30%;
+              }
+            }
+        }
+        .navbar-toggler{
+          @media only  screen and (max-width:1023px){
+            width: max-content;
+            background: none;
+            float: right;
+            background: $primeColor !important;
+            padding: 0;
+            height: max-content;
           }
         }
+        
       }
-    }
-   
-    .links{
-      padding-top: 50px;
-      .menu-primary-navigation{
-        list-style: none;
-        width: 100%;
-        display: inline-flex;
-        font-size: 16px;
-        padding-left: 50px;
-        padding-right: 50px;
-        .menu-item{
-          list-style: none;
-          width: 33%;
+     
+      .navbar-collapse{
+        @media only  screen and (max-width:768px){
+          position: absolute;
+          top: 100%;
+          width: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+          left: 0px;
           text-align: center;
-          margin-right: -4px;
-          .dropdown{
-            >button{
-              width: max-content;
-              height: max-content;
-              color: white;
-              padding: 0;
-            }
-          }
-          #dropdown-basic-button{
-            background: none;
-            border: none;
-            width: max-content;
-            padding: 0;
-            display: inline-flex;
-            &:after{
-              margin-top: 10px;
-            }
-            &:hover{
-              font-size: 18px;
-            }
-          }
-          &:hover{
-            font-size: 18px;
-          }
+          z-index: 1000;
+        }
+        .navbar-nav{
           >a{
             text-decoration: none;
             color: white;
             cursor: pointer;
+            text-align: center;
+
+          }
+          .nav-item{
+            >a{
+              text-decoration: none;
+              color: white;
+              cursor: pointer;
+            }
           }
         }
       }
+      
     }
     .text-banner{
-      margin-top: 10%;
       text-align: left;
-      >h1{
-        color: white;
+      position: absolute;
+      z-index: 1000;
+      top: 40%;
+      
+      >div{
+        width: 100%;
+        text-align: left;
+        margin: 0 auto;
+        >h1{
+          color: white;
+        }
+      }
+      
+
+      @media only  screen and (max-width:768px){
+        
+        top: 25%;
       }
     }
   }
+
+
   .header.product{
-    position: relative;
-    background-color: rgba(0, 0, 0, 0.5);
-    .head{
-      background: none;
+    .navbar{
+      position: relative;
+      background-color: $grayBackground !important;
+      .container{
+        background: none;
+      }
     }
     .text-banner{
       display: none;
     }
+    
   }
   .forms{
     z-index: 1001;
@@ -118,20 +152,57 @@ body{
     padding: 2%;
     .input-group{
       height: 50px;
+      @media only  screen and (max-width:768px){
+        height: 100%;
+      }
       >select{
         width: 10%;
+        @media only  screen and (max-width:768px){
+          width: 80%;
+          margin: 2% auto;
+          height: 100%;
+          margin-left: auto !important;
+          height: 40px;
+          border-radius: 10px !important;
+        }
       }
       >input[name= searchWord]{
         width: 25%;
+        @media only  screen and (max-width:768px){
+          width: 80%;
+          margin: 2% auto;
+          height: 100%;
+          margin-left: auto !important;
+          height: 40px;
+          border-radius: 10px !important;
+        }
       }
-      >input[type= submit]{
+      #searchButton{
         width: 14%;
+        @media only  screen and (max-width:768px){
+          width: 80%;
+          margin: 2% auto;
+          height: 100%;
+          margin-left: auto !important;
+          border-radius: 10px !important;
+        }
+        @media screen and (min-width:768px) and (max-width:1023px) {
+          padding: 0;
+        }
       }
       >input[name= sizeFrom],
-      >input[name= sifeOf],
+      >input[name= sizeOf],
       >input[name= priceOf],
       >input[name= priceFrom]{
         width: 10%;
+        @media only  screen and (max-width:768px){
+          width: 80%;
+          margin: 2% auto;
+          height: 100%;
+          margin-left: auto !important;
+          height: 40px;
+          border-radius: 10px !important;
+        }
       }
       
     }
@@ -140,6 +211,9 @@ body{
     margin-top: 5%;
     .result-search{
       .search-container {
+        @media only  screen and (max-width:768px){
+          margin: 0;
+        }
        >div{
           .result-count{
             text-align: center;
@@ -236,7 +310,10 @@ body{
             }
           }
         }
-        
+        >img{
+          width: 8%;
+          margin: 0 auto;
+        }
       }
     }
   }
@@ -278,6 +355,9 @@ body{
       height: 60vh;
       width: 100%;
       object-fit: cover;
+      @media only  screen and (max-width:768px){
+        height: 90vh;
+      }
     }
     >div{
       position: absolute;
@@ -286,11 +366,20 @@ body{
       right: 0;
       margin-left: auto;
       margin-right: auto;
+      @media screen and (min-width:768px) and (max-width:1200px) {
+        top: 7%;
+      }
+      @media screen and (max-width:1530px) and (min-width:1201px) {
+          top:9.5%;
+      }
       .container-quest{
         background-color: rgba(255,255,255,0.8);
         padding: 30px;
         text-align: center;
         display: inline-grid;
+        @media only  screen and (min-width:1023px) and (max-width:1200px){
+          padding: 20px;
+        }
         >a{
           width: max-content;
           margin: 0 auto;
@@ -316,6 +405,9 @@ body{
     >div{
       padding: 1%;
       >div{
+        @media only  screen and (max-width:768px){
+          margin: 0;
+        }
         .name{
           >h2{
             >span{
@@ -377,8 +469,9 @@ body{
                   >div{
                     >img{
                       width: 100%;
-                      height: 460px;
+                      height: 49vh;
                       object-fit: contain;
+                      
                     }
                   }
                 }
@@ -391,6 +484,7 @@ body{
             height: max-content;
             background-color: rgba(255, 255, 255, 0.2);
             border-radius: 30px;
+            
           }
           .slick-next{
             right: 2%;
@@ -413,9 +507,20 @@ body{
     .section-wrap{
       width: 80%;
       margin-bottom: 1%;
+      @media screen and (max-width:786px) {
+        width: 100%;
+      }
+      >div{
+        margin: 2% auto;
+          width: 100%;
+        
+      }
       .location{
         margin-top: 2%;
         >div{
+          @media screen and (max-width:786px) {
+            padding: 0;
+          }
           >span{
             font-size: 20px;
           }
@@ -455,8 +560,14 @@ body{
             flex-wrap: wrap;
             justify-content: space-between;
             list-style: none;
+            @media screen and (max-width:786px) {
+              display: block;
+            }
             >li{
               width: calc(50% - 10px);
+              @media screen and (max-width:786px) {
+                width: 100%;
+              }
               >strong{
                 margin-left: 5px;
               }
@@ -519,8 +630,18 @@ button {
 
 //ADMIN
 .header-admin{
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: $grayBackground;
   .container{
+    .navbar-toggler{
+      @media only  screen and (max-width:1023px){
+        width: max-content;
+        background: none;
+        float: right;
+        background: $primeColor !important;
+        padding: 0;
+        height: max-content;
+      }
+    }
     .navbar-brand{
       color:$primeColor;
       font-size: 25px;
@@ -530,6 +651,7 @@ button {
         color: white;
         font-size: 18px;
       }
+      
     }
     .navbar-collapse{
       .navbar-text{
@@ -605,7 +727,13 @@ button {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
-  margin-top: 2%;
+  @media screen and (max-width:1023px) {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    margin-top: 2%;
+  }
+
 }
 
 
@@ -620,7 +748,8 @@ button {
   width: 100%;
   overflow: auto;
   overflow-x: auto;
-  >tr{
+  @media screen and (min-width:1024px) {
+      >tr{
     display: flex;
     th:nth-child(1){
       width: 5%;
@@ -641,6 +770,19 @@ button {
       padding: 20px;
     }
   }
+  }
+
+  @media screen and (max-width:1023px) {
+    >tr{
+      display: flex;
+      >th{
+        width: 150px;
+        padding: 20px;
+        height: 50px;
+        overflow: hidden;
+      }
+    }
+  }
 }
 
 #blogs tbody {
@@ -652,7 +794,8 @@ button {
   background: white;
   overflow: auto;
   overflow-x: auto;
-  >tr{
+  @media screen and (min-width:1024px) {
+    >tr{
     display: flex;
     th:nth-child(1){
       width: 5%;
@@ -675,6 +818,20 @@ button {
       overflow: hidden;
     }
   }
+  }
+  
+  @media screen and (max-width:1023px) {
+    >tr{
+      display: flex;
+      >th{
+        width: 150px;
+        padding: 20px;
+        height: 50px;
+        overflow: hidden;
+      }
+    }
+  }
+  
 }
 
 .popup-box {
@@ -726,10 +883,19 @@ button {
     display: inline-block;
     width: 100%;
     padding: 20px;
+    @media screen and (max-width:1023px) {
+      display: block;
+    }
     .content-form{
       display: flex;
+      @media screen and (max-width:1023px) {
+        display: block;
+      }
       #basicInf{
         width: 50%;
+        @media screen and (max-width:1023px) {
+          width: 100%;
+        }
         >h5{
           border-bottom: 1px solid gray;
           width: max-content;
@@ -743,7 +909,10 @@ button {
           display: block;
           width: 80%;
           text-align: center;
-          padding: 5px
+          padding: 5px;
+          @media screen and (max-width:1023px) {
+            width: 100%;
+          }
         }
         >label{
           display: block;
@@ -755,11 +924,17 @@ button {
           display: block;
           width: 80%;
           text-align: center;
+          @media screen and (max-width:1023px) {
+            width: 100%;
+          }
         }
         >textarea{
           width: 80%;
           height: 20vh;
           margin: 0 0;
+          @media screen and (max-width:1023px) {
+            width: 100%;
+          }
         }
         >div{
           .dropZone{
@@ -776,6 +951,9 @@ button {
       }
       #moreInf{
         width: 50%;
+        @media screen and (max-width:1023px) {
+          width: 100%;
+        }
         >h5{
           border-bottom: 1px solid gray;
           width: max-content;
@@ -845,6 +1023,10 @@ button {
   &:hover{
       background: $primeColorHover;
   }
+  @media screen and (max-width:1023px) {
+    width: max-content;
+    margin-left: 2%;
+  }
 }
 
 
@@ -857,10 +1039,16 @@ button {
     display: inline-block;
     width: 100%;
     padding: 20px;
+    @media screen and (max-width:1023px) {
+      display: block;
+    }
     .content-form{
       display: grid;
       width: 100%;
       margin: 0 auto;
+      @media screen and (max-width:1023px) {
+        display: block;
+      }
         >input{
           display: block;
           width: 100%;
@@ -871,6 +1059,7 @@ button {
           display: block;
           font-size: 16px;
           font-weight: bold;
+          color: white;
         }
        
         >textarea{
@@ -931,6 +1120,9 @@ button {
   padding: 20px;
   .content-form{
     width: 70%;
+    @media screen and (max-width:1024px) {
+      width: 100%;
+    }
     >div{
       >div{
         display: grid;
@@ -991,6 +1183,9 @@ button {
     .contact-section{
       width: 70%;
       padding-right: 10%;
+      @media screen and (max-width:768px) {
+        width: 100%;
+      }
       >div{
         >div{
           display: grid;
@@ -1029,9 +1224,17 @@ button {
     }
     .image-section{
       width: 30%;
+      @media screen and (max-width:768px) {
+        display: none;
+      }
       >img{
         width: 100%;
       }
+    }
+  }
+  .button-section{
+    @media screen and (max-width:1024px) {
+      margin-top: 2%;
     }
   }
 }
@@ -1071,6 +1274,9 @@ button {
     >iframe{
       width: 70%;
       height: 250px;
+      @media screen and (max-width:786px) {
+        width: 100%;
+      }
     }
   }
   .map-detail{
@@ -1146,4 +1352,19 @@ button {
 
 .flag-icon-srb {
   background-image: url("Header/img/Flag-Serbia.png");
+}
+
+.pagination{
+  .page-item{
+    >button{
+      width: 100%;
+    }
+  }
+}
+
+.container.no-text{
+  margin-top: 2%;
+    margin-bottom: 2%;
+    padding: 10%;
+    text-align: center;
 }

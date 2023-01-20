@@ -17,7 +17,7 @@ export default function Footer() {
             </div>
             <div className="row">
                 <div className="col-md-4 offset-md-4 mobileNumber">
-                <a href="tel:7078155908">(707) 815-5908</a>|<a href="/kontakt">{t("contact")}</a>
+                <a href="tel:+381611829110">+38162489000</a>|<a href="/kontakt">{t("con")}</a>
                 </div>
             </div>
             <div className="row">

@@ -9,8 +9,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Product from './Product'
 import Login from './Login';
 import Admin from './Admin';
-import {AuthContext} from "./helpers/AuthContext"
-import {useState} from "react"
+import {useEffect, useState} from "react"
 import Products from './Admin/Product/Products';
 import Blog from './Admin/Blog';
 import Blogs from './Blogs';
@@ -22,13 +21,24 @@ import Conditions from './Conditions';
 import Price from './Price';
 import CreditAdvisor from './CreditAdvisor';
 import RentSellProduct from './RentSellProduct';
+import ReactGA from 'react-ga';
+import React, {useContext} from "react";
+import { AuthContext } from './helpers/AuthContext';
+import { Helmet } from 'react-helmet';
+
+
+
 
 
 function App() {
-  const [authState, setAuthState] = useState(false)
+  const { state } = useContext(AuthContext);
+  const TRACKING_ID = "G-GMQN9ZZJ8G";
+  ReactGA.initialize(TRACKING_ID);
+  ReactGA.pageview(window.location.pathname + window.location.search);
+
+
   return (
     <div className="App">
-      <AuthContext.Provider value={{authState,setAuthState}}>
         <Router>
           <Routes>
             <Route exact path="/" element={<><Header class='main'></Header><SimpleSlider></SimpleSlider><SearchForm action="sell"></SearchForm><NewPost></NewPost><SendQuest></SendQuest><Footer></Footer></>}/>
@@ -48,7 +58,6 @@ function App() {
             <Route exact path='/nekretnine' element={<><Header class='product'></Header><RentSellProduct></RentSellProduct><Footer></Footer></>}></Route>
           </Routes>
         </Router>
-      </AuthContext.Provider>
     </div>
   );
 }
