@@ -102,7 +102,7 @@ export default function MyForm() {
                             <option value="Stan">Stan</option>
                             <option value="Kuca">Kuca</option>
                             <option value="Poslovni prostor">Poslovni prostor</option>
-                            <option value="Plac">Plac</option>
+                            <option value="Zemljiste">Zemljiste</option>
                             <option value="Garaza">Garaza</option>
                         </select>
                         {/* NASLOV */}

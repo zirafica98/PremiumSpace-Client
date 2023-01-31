@@ -40,8 +40,7 @@ export default function SearchForm() {
                   <select name="type" onChange={(e) => {setType(e.target.value)}}>
                       <option value="Stan">{t("apartment")}</option>
                       <option value="Kuca">{t("house")}</option>
-                      <option value="Lokal">{t("shop")}</option>
-                      <option value="PoslovniProstor">{t("business_premises")}</option>
+                      <option value="Poslovni prostor">{t("business_premises")}</option>
                       <option value="Zemljiste">{t("land")}</option>
                       <option value="Garaza">{t("garage")}</option>
                   </select>

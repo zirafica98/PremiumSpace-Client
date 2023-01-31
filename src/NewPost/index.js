@@ -15,40 +15,42 @@ export default function NewPost() {
  let history = useNavigate();
  const { t } = useTranslation();
 
-   useEffect ( ()=>{
-    async function fetchData() {
-        var formData = new FormData();
-        formData.append('function', 'getLastRealEstate');  
-        var params = {
-            method:'POST',
-            body:formData
-        }
-        // fetch("https://server.premiumspace.rs/RealEstate.php",params)
-        //     .then(response => response.json())
-        //     .then((response) => {
-        //         setData(response);
-        //         setIsLoading(true);
-        //     }
-        // )
+ async function fetchData() {
+  var formData = new FormData();
+  formData.append('function', 'getLastRealEstate');  
+  var params = {
+      method:'POST',
+      body:formData
+  }
+  // fetch("https://server.premiumspace.rs/RealEstate.php",params)
+  //     .then(response => response.json())
+  //     .then((response) => {
+  //         setData(response);
+  //         setIsLoading(true);
+  //     }
+  // )
 
-            $.post('https://server.premiumspace.rs/RealEstate.php',
-                { function: "getLastRealEstate"
-                },
-                function(data) {
-                    var result = JSON.parse(data);
-                     setData(result);
-                      setIsLoading(true);
-                      if(result.length<3){
-                        setNumberSlide(2);
-                      }else{
-                        setNumberSlide(3);
-                      }
+      $.post('https://server.premiumspace.rs/RealEstate.php',
+          { function: "getLastRealEstate"
+          },
+          function(data) {
+              var result = JSON.parse(data);
+               setData(result);
+                setIsLoading(true);
+                if(result.length<3){
+                  setNumberSlide(2);
+                }else{
+                  setNumberSlide(3);
                 }
-            )
+          }
+      )
 
-    }
+}
+
+   useEffect ( ()=>{
+   
       fetchData();
-  },[])
+  },[data])
 
   const settings = {
       dots: false,

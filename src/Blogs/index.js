@@ -28,7 +28,7 @@ function Blogs() {
                 response.forEach((element,index)=>{
                     var newDate=new Date(element.updatedAt)
                     var day= newDate.getDate();
-                    var month = newDate.getMonth();
+                    var month = newDate.getMonth() +1;
                     var year = newDate.getFullYear();
     
                     var dataString= day + "." + month + "." + year 
