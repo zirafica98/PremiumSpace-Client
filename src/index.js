@@ -38,9 +38,9 @@ i18n
 
 root.render(
   <ContextProvider value={500}>
-    <React.StrictMode>
+    
     <App />
-  </React.StrictMode>
+  
   </ContextProvider>
   
 );

@@ -100,10 +100,10 @@ export default function MyFormEdit(data) {
                         <label>Tip nekretnine *</label>
                         <select name="tipNekretnine" id="tipNekretnine" select={data.data.tipNekretnine} defaultValue={data.data.tipNekretnine} onChange={(event) => {setTipNekretnine(event.target.value);}}>
                             <option value="Stan">Stan</option>
-                            <option value="Kuca">Kuca</option>
+                            <option value="Kuća">Kuća</option>
                             <option value="Poslovni prostor">Poslovni prostor</option>
                             <option value="Plac">Plac</option>
-                            <option value="Garaza">Garaza</option>
+                            <option value="Garaža">Garaža</option>
                         </select>
                         {/* NASLOV */}
                         <label>Naslov *</label>
@@ -129,22 +129,22 @@ export default function MyFormEdit(data) {
                         {/* UKNJIZENOST */}
                         <label>Uknjizenost</label>
                         <select name="uknjizenost" id="uknjizenost" defaultValue={data.data.uknjizenost} onChange={(event) => {setUknjizenost(event.target.value);}}>
-                            <option value="Uknjizeno">Uknjizeno</option>
-                            <option value="Nije uknjizeno">Nije uknjizeno</option>
-                            <option value="U procesu uknjizenja">U procesu uknjizenja</option>
-                            <option value="Delimicno uknjizeno">Delimicno uknjizeno</option>
+                            <option value="Uknjiženo">Uknjizeno</option>
+                            <option value="Nije uknjiženo">Nije uknjizeno</option>
+                            <option value="U procesu uknjiženja">U procesu uknjiženja</option>
+                            <option value="Delimicno uknjiženo">Delimicno uknjiženo</option>
                         </select>
                         {/* STANJE */}
                         <label>Stanje</label>
                         <select name="stanje" id="stanje" defaultValue={data.data.stanje} onChange={(event) => {setStanje(event.target.value);}}>
-                            <option value="Uobicajno">Uobicajno</option>
+                            <option value="Uobičajno">Uobičajno</option>
                             <option value="Novo">Novo</option>
                             <option value="U izgradnji">U izgradnji</option>
                             <option value="Renovirano">Renovirano</option>
                             <option value="Potrebno renoviranje">Potrebno renoviranje</option>
                             <option value="Dobro stanje">Dobro stanje</option>
                             <option value="Staro">Staro</option>
-                            <option value="Odrzavano">Odrzavano</option>
+                            <option value="Održavano">Održavano</option>
                             <option value="Luksuzno">Luksuzno</option>
                         </select>
                         {/* POVRSINA */}
@@ -161,14 +161,14 @@ export default function MyFormEdit(data) {
                         <select name='grejanje' id='grejanje' defaultValue={data.data.grejanje} onChange={(event) => {setGrejanje(event.target.value);}}>
                             <option value="Nema grejanja">Nema grejanja</option>
                             <option value="Centralno">Centralno</option>
-                            <option value="Erazno">Etazno</option>
+                            <option value="Etažno">Etažno</option>
                             <option value="Struja">Struja</option>
                             <option value="Gas">Gas</option>
-                            <option value="Kaljeva pec">Kaljeva pec</option>
-                            <option value="Ta pex">Ta pec</option>
-                            <option value="Norveski radijatori">Norveski radijatori</option>
+                            <option value="Kaljeva peć">Kaljeva peć</option>
+                            <option value="Ta peć">Ta peć</option>
+                            <option value="Norveški radijatori">Norveški radijatori</option>
                             <option value="Podno">Podno</option>
-                            <option value="Cvrsto gorivo">Cvrsto gorivo</option>
+                            <option value="Čvrsto gorivo">Čvrsto gorivo</option>
                             <option value="Alokatori">Alokatori</option>
                             <option value="Toplotna pumpa">Toplotna pumpa</option>
                             <option value="Klima">Klima</option>
@@ -184,8 +184,8 @@ export default function MyFormEdit(data) {
                         <label>Opremljenost</label>
                         <select name='opremljenost' id='opremljenost' defaultValue={data.data.opremljenost} onChange={(event) => {setOpremljenost(event.target.value);}}>
                             <option value="prazan">Prazan</option>
-                            <option value="polunamesten">Polunamesten</option>
-                            <option value="namesten">Namesten</option>
+                            <option value="polunamešten">Polunamešten</option>
+                            <option value="namešten">Namešten</option>
                         </select>
                         {/* DODAVANJE FOTOGRAFIJA */}
                         <label>Dodaj fotografije</label>

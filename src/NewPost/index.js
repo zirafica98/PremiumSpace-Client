@@ -22,13 +22,6 @@ export default function NewPost() {
       method:'POST',
       body:formData
   }
-  // fetch("https://server.premiumspace.rs/RealEstate.php",params)
-  //     .then(response => response.json())
-  //     .then((response) => {
-  //         setData(response);
-  //         setIsLoading(true);
-  //     }
-  // )
 
       $.post('https://server.premiumspace.rs/RealEstate.php',
           { function: "getLastRealEstate"
@@ -50,7 +43,7 @@ export default function NewPost() {
    useEffect ( ()=>{
    
       fetchData();
-  },[data])
+  },[])
 
   const settings = {
       dots: false,

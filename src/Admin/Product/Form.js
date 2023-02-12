@@ -100,10 +100,10 @@ export default function MyForm() {
                         <label>Tip nekretnine *</label>
                         <select name="tipNekretnine" id="tipNekretnine" onChange={(event) => {setTipNekretnine(event.target.value);}}>
                             <option value="Stan">Stan</option>
-                            <option value="Kuca">Kuca</option>
+                            <option value="Kuća">Kuca</option>
                             <option value="Poslovni prostor">Poslovni prostor</option>
-                            <option value="Zemljiste">Zemljiste</option>
-                            <option value="Garaza">Garaza</option>
+                            <option value="Zemljište">Zemljište</option>
+                            <option value="Garaža">Garaža</option>
                         </select>
                         {/* NASLOV */}
                         <label>Naslov *</label>
@@ -127,12 +127,12 @@ export default function MyForm() {
                         <label>Broj</label>
                         <input type="text" id="broj" name='broj' placeholder='Unesite broj...' onChange={(event) => {setBroj(event.target.value);}}></input>
                         {/* UKNJIZENOST */}
-                        <label>Uknjizenost</label>
+                        <label>Uknjiženost</label>
                         <select name="uknjizenost" id="uknjizenost" onChange={(event) => {setUknjizenost(event.target.value);}}>
-                            <option value="Uknjizeno">Uknjizeno</option>
-                            <option value="Nije uknjizeno">Nije uknjizeno</option>
-                            <option value="U procesu uknjizenja">U procesu uknjizenja</option>
-                            <option value="Delimicno uknjizeno">Delimicno uknjizeno</option>
+                            <option value="Uknjizeno">Uknjiženo</option>
+                            <option value="Nije uknjizeno">Nije uknjiženo</option>
+                            <option value="U procesu uknjizenja">U procesu uknjiženja</option>
+                            <option value="Delimicno uknjizeno">Delimično uknjiženo</option>
                         </select>
                         {/* STANJE */}
                         <label>Stanje</label>
@@ -161,14 +161,14 @@ export default function MyForm() {
                         <select name='grejanje' id='grejanje' onChange={(event) => {setGrejanje(event.target.value);}}>
                             <option value="Nema grejanja">Nema grejanja</option>
                             <option value="Centralno">Centralno</option>
-                            <option value="Erazno">Etazno</option>
+                            <option value="Etažno">Etažno</option>
                             <option value="Struja">Struja</option>
                             <option value="Gas">Gas</option>
-                            <option value="Kaljeva pec">Kaljeva pec</option>
-                            <option value="Ta pex">Ta pec</option>
-                            <option value="Norveski radijatori">Norveski radijatori</option>
+                            <option value="Kaljeva peć">Kaljeva peć</option>
+                            <option value="Ta peć">Ta peć</option>
+                            <option value="Norveški radijatori">Norveški radijatori</option>
                             <option value="Podno">Podno</option>
-                            <option value="Cvrsto gorivo">Cvrsto gorivo</option>
+                            <option value="Čvrsto gorivo">Čvrsto gorivo</option>
                             <option value="Alokatori">Alokatori</option>
                             <option value="Toplotna pumpa">Toplotna pumpa</option>
                             <option value="Klima">Klima</option>
@@ -184,8 +184,8 @@ export default function MyForm() {
                         <label>Opremljenost</label>
                         <select name='opremljenost' id='opremljenost' onChange={(event) => {setOpremljenost(event.target.value);}}>
                             <option value="prazan">Prazan</option>
-                            <option value="polunamesten">Polunamesten</option>
-                            <option value="namesten">Namesten</option>
+                            <option value="polunamesten">Polunamešten</option>
+                            <option value="namesten">Namešten</option>
                         </select>
                         {/* DODAVANJE FOTOGRAFIJA */}
                         <label>Dodaj fotografije</label>
