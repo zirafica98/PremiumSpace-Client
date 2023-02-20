@@ -13,6 +13,7 @@ export default function Product() {
     const [data, setData] = useState([])
     const [image,setImage] = useState([])
     const [linkAddress, setLinkAddress] = useState([]);
+    const [priceWithSize,setPriceWithSize] = useState();
     const { t } = useTranslation();
 
     const settings = {
@@ -56,7 +57,7 @@ export default function Product() {
               });
               setImage(imageArrayCheck);
               setData(response);
-
+              setPriceWithSize(new Intl.NumberFormat('en-US',{minimumFractionDigits: 2,maximumFractionDigits: 2}, { style: 'currency', currency: 'EUR' }).format(parseFloat((response.cena))/parseFloat((response.povrsina).replaceAll(',', '.'))))
               setLinkAddress("https://www.google.com/maps/embed/v1/place?key=AIzaSyBDsxzY2Lp_gp_9NwEWRa79mAgLxfSa5gQ&region=SR&language=sr&q="+ response.drzava +","+response.grad + "," +response.opstina +" "+ response.ulica + " " + response.broj);
             })
             
@@ -101,8 +102,8 @@ export default function Product() {
                 </div>
                 <div className="row priceAndSize">
                   <div className="col-md-5  col-lg-3 col-sm-12">
-                  <span className="price">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(data.cena)}</span>
-                  <span className="priceWithSize">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(parseInt(data.cena)/parseInt(data.povrsina))}/m²</span>
+                  <span className="price">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'EUR' }).format(data.cena)}</span>
+                <span className="priceWithSize">{priceWithSize}/m²</span>
                   </div>
                 </div>
                 <div className="row details">

@@ -161,7 +161,7 @@ export default function MyForm() {
                         <select name='grejanje' id='grejanje' onChange={(event) => {setGrejanje(event.target.value);}}>
                             <option value="Nema grejanja">Nema grejanja</option>
                             <option value="Centralno">Centralno</option>
-                            <option value="Etažno">Etažno</option>
+                            <option value="Etazno">Etazno</option>
                             <option value="Struja">Struja</option>
                             <option value="Gas">Gas</option>
                             <option value="Kaljeva peć">Kaljeva peć</option>
