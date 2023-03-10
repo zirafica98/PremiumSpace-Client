@@ -18,6 +18,7 @@ function Contact() {
                     <div className='col-md-6 col-sm-12'>
                         <span>Premium space agencija za nekretnine</span>
                         <a href='tel:+381611829110'>+38162489000</a>
+                        <a href="tel:+381114576739">+381114576739</a>
                         <a href='mailto:office@premiumspace.rs'>office@premiumspace.rs</a>
                     </div>
                     <div className='col-md-6 col-sm-12'>

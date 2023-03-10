@@ -100,10 +100,10 @@ export default function MyForm() {
                         <label>Tip nekretnine *</label>
                         <select name="tipNekretnine" id="tipNekretnine" onChange={(event) => {setTipNekretnine(event.target.value);}}>
                             <option value="Stan">Stan</option>
-                            <option value="Kuća">Kuca</option>
+                            <option value="Kuca">Kuca</option>
                             <option value="Poslovni prostor">Poslovni prostor</option>
-                            <option value="Zemljište">Zemljište</option>
-                            <option value="Garaža">Garaža</option>
+                            <option value="Zemljiste">Zemljiste</option>
+                            <option value="Garaza">Garaza</option>
                         </select>
                         {/* NASLOV */}
                         <label>Naslov *</label>
@@ -164,11 +164,11 @@ export default function MyForm() {
                             <option value="Etazno">Etazno</option>
                             <option value="Struja">Struja</option>
                             <option value="Gas">Gas</option>
-                            <option value="Kaljeva peć">Kaljeva peć</option>
-                            <option value="Ta peć">Ta peć</option>
-                            <option value="Norveški radijatori">Norveški radijatori</option>
+                            <option value="Kaljeva pec">Kaljeva peć</option>
+                            <option value="Ta pec">Ta peć</option>
+                            <option value="Norveski radijatori">Norveški radijatori</option>
                             <option value="Podno">Podno</option>
-                            <option value="Čvrsto gorivo">Čvrsto gorivo</option>
+                            <option value="Cvrsto gorivo">Čvrsto gorivo</option>
                             <option value="Alokatori">Alokatori</option>
                             <option value="Toplotna pumpa">Toplotna pumpa</option>
                             <option value="Klima">Klima</option>

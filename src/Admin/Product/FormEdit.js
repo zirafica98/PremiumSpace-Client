@@ -100,10 +100,10 @@ export default function MyFormEdit(data) {
                         <label>Tip nekretnine *</label>
                         <select name="tipNekretnine" id="tipNekretnine" select={data.data.tipNekretnine} defaultValue={data.data.tipNekretnine} onChange={(event) => {setTipNekretnine(event.target.value);}}>
                             <option value="Stan">Stan</option>
-                            <option value="Kuća">Kuća</option>
+                            <option value="Kuca">Kuca</option>
                             <option value="Poslovni prostor">Poslovni prostor</option>
-                            <option value="Plac">Plac</option>
-                            <option value="Garaža">Garaža</option>
+                            <option value="Zemljiste">Zemljiste</option>
+                            <option value="Garaza">Garaza</option>
                         </select>
                         {/* NASLOV */}
                         <label>Naslov *</label>
@@ -129,22 +129,22 @@ export default function MyFormEdit(data) {
                         {/* UKNJIZENOST */}
                         <label>Uknjizenost</label>
                         <select name="uknjizenost" id="uknjizenost" defaultValue={data.data.uknjizenost} onChange={(event) => {setUknjizenost(event.target.value);}}>
-                            <option value="Uknjiženo">Uknjizeno</option>
-                            <option value="Nije uknjiženo">Nije uknjizeno</option>
-                            <option value="U procesu uknjiženja">U procesu uknjiženja</option>
-                            <option value="Delimicno uknjiženo">Delimicno uknjiženo</option>
+                            <option value="Uknjizeno">Uknjizeno</option>
+                            <option value="Nije uknjizeno">Nije uknjizeno</option>
+                            <option value="U procesu uknjizenja">U procesu uknjiženja</option>
+                            <option value="Delimicno uknjizeno">Delimicno uknjiženo</option>
                         </select>
                         {/* STANJE */}
                         <label>Stanje</label>
                         <select name="stanje" id="stanje" defaultValue={data.data.stanje} onChange={(event) => {setStanje(event.target.value);}}>
-                            <option value="Uobičajno">Uobičajno</option>
+                            <option value="Uobicajno">Uobičajno</option>
                             <option value="Novo">Novo</option>
                             <option value="U izgradnji">U izgradnji</option>
                             <option value="Renovirano">Renovirano</option>
                             <option value="Potrebno renoviranje">Potrebno renoviranje</option>
                             <option value="Dobro stanje">Dobro stanje</option>
                             <option value="Staro">Staro</option>
-                            <option value="Održavano">Održavano</option>
+                            <option value="Odrzavano">Održavano</option>
                             <option value="Luksuzno">Luksuzno</option>
                         </select>
                         {/* POVRSINA */}
@@ -165,10 +165,10 @@ export default function MyFormEdit(data) {
                             <option value="Struja">Struja</option>
                             <option value="Gas">Gas</option>
                             <option value="Kaljeva peć">Kaljeva peć</option>
-                            <option value="Ta peć">Ta peć</option>
-                            <option value="Norveški radijatori">Norveški radijatori</option>
+                            <option value="Ta pec">Ta peć</option>
+                            <option value="Norveski radijatori">Norveški radijatori</option>
                             <option value="Podno">Podno</option>
-                            <option value="Čvrsto gorivo">Čvrsto gorivo</option>
+                            <option value="Cvrsto gorivo">Čvrsto gorivo</option>
                             <option value="Alokatori">Alokatori</option>
                             <option value="Toplotna pumpa">Toplotna pumpa</option>
                             <option value="Klima">Klima</option>
