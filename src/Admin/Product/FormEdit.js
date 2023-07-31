@@ -184,8 +184,8 @@ export default function MyFormEdit(data) {
                         <label>Opremljenost</label>
                         <select name='opremljenost' id='opremljenost' defaultValue={data.data.opremljenost} onChange={(event) => {setOpremljenost(event.target.value);}}>
                             <option value="prazan">Prazan</option>
-                            <option value="polunamešten">Polunamešten</option>
-                            <option value="namešten">Namešten</option>
+                            <option value="polunamesten">Polunamešten</option>
+                            <option value="namesten">Namešten</option>
                         </select>
                         {/* DODAVANJE FOTOGRAFIJA */}
                         <label>Dodaj fotografije</label>
